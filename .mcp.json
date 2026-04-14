@@ -1,23 +1,73 @@
 {
   "name": "git-helper-ai-mcp",
-  "description": "MEOK AI Labs \u2014 Git Helper tools for AI agents and LLMs",
-  "vendor": "MEOK AI Labs",
-  "homepage": "https://meok.ai",
-  "repository": "https://github.com/CSOAI-ORG/git-helper-ai-mcp",
-  "runtime": "python",
-  "entrypoint": "server.py",
+  "description": "MCP server for Git analysis tools.",
+  "version": "1.0.0",
   "tools": [
-    "parse_diff",
-    "generate_commit_message",
-    "analyze_branch",
-    "changelog_generator"
-  ],
-  "categories": [
-    "Developer Tools",
-    "Git"
-  ],
-  "pricing": {
-    "free": "50 calls/day",
-    "pro": "$9/mo"
-  }
+    {
+      "name": "parse_diff",
+      "description": "Parse a unified diff and extract structured change information.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "diff_text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "diff_text"
+        ]
+      }
+    },
+    {
+      "name": "generate_commit_message",
+      "description": "Generate a commit message from a diff. Styles: conventional, simple, detailed.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "diff_text": {
+            "type": "string"
+          },
+          "style": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "diff_text"
+        ]
+      }
+    },
+    {
+      "name": "analyze_branch",
+      "description": "Analyze git log output. Expects format: hash|author|date|message (one per line).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "log_text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "log_text"
+        ]
+      }
+    },
+    {
+      "name": "changelog_generator",
+      "description": "Generate a changelog from git log. Expects: hash|author|date|message per line.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "log_text": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "log_text"
+        ]
+      }
+    }
+  ]
 }

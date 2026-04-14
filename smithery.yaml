@@ -1,10 +1,37 @@
 name: git-helper-ai-mcp
-description: "MEOK AI Labs — Git Helper tools for AI agents and LLMs"
-vendor: MEOK AI Labs
-homepage: https://meok.ai
-repository: https://github.com/CSOAI-ORG/git-helper-ai-mcp
-license: MIT
-categories: [Developer Tools, Git]
-tags: [git, version-control, github, git-workflow, repository-management]
-runtime: python
-entrypoint: server.py
+description: MCP server for Git analysis tools.
+version: 1.0.0
+tools:
+- name: parse_diff
+  description: Parse a unified diff and extract structured change information.
+  parameters:
+  - name: diff_text
+    type: string
+    required: true
+- name: generate_commit_message
+  description: 'Generate a commit message from a diff. Styles: conventional, simple,
+    detailed.'
+  parameters:
+  - name: diff_text
+    type: string
+    required: true
+  - name: style
+    type: string
+    required: false
+- name: analyze_branch
+  description: 'Analyze git log output. Expects format: hash|author|date|message (one
+    per line).'
+  parameters:
+  - name: log_text
+    type: string
+    required: true
+- name: changelog_generator
+  description: 'Generate a changelog from git log. Expects: hash|author|date|message
+    per line.'
+  parameters:
+  - name: log_text
+    type: string
+    required: true
+  - name: version
+    type: string
+    required: false

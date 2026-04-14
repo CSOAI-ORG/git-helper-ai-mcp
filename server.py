@@ -1,4 +1,9 @@
 """Git Helper AI MCP Server — Git analysis tools."""
+
+import sys, os
+sys.path.insert(0, os.path.expanduser('~/clawd/meok-labs-engine/shared'))
+from auth_middleware import check_access
+
 import re
 import time
 from datetime import datetime
@@ -19,8 +24,12 @@ def _rate_check(tool: str) -> bool:
     return True
 
 @mcp.tool()
-def parse_diff(diff_text: str) -> dict[str, Any]:
+def parse_diff(diff_text: str, api_key: str = "") -> dict[str, Any]:
     """Parse a unified diff and extract structured change information."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _rate_check("parse_diff"):
         return {"error": "Rate limit exceeded (50/day)"}
     files = []
@@ -60,8 +69,12 @@ def parse_diff(diff_text: str) -> dict[str, Any]:
     }
 
 @mcp.tool()
-def generate_commit_message(diff_text: str, style: str = "conventional") -> dict[str, Any]:
+def generate_commit_message(diff_text: str, style: str = "conventional", api_key: str = "") -> dict[str, Any]:
     """Generate a commit message from a diff. Styles: conventional, simple, detailed."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _rate_check("generate_commit_message"):
         return {"error": "Rate limit exceeded (50/day)"}
     parsed = parse_diff.__wrapped__(diff_text) if hasattr(parse_diff, '__wrapped__') else parse_diff(diff_text)
@@ -102,8 +115,12 @@ def generate_commit_message(diff_text: str, style: str = "conventional") -> dict
     return {"message": msg, "type": ctype, "scope": scope, "files_changed": len(files), "additions": adds, "deletions": dels}
 
 @mcp.tool()
-def analyze_branch(log_text: str) -> dict[str, Any]:
+def analyze_branch(log_text: str, api_key: str = "") -> dict[str, Any]:
     """Analyze git log output. Expects format: hash|author|date|message (one per line)."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _rate_check("analyze_branch"):
         return {"error": "Rate limit exceeded (50/day)"}
     commits = []
@@ -139,8 +156,12 @@ def analyze_branch(log_text: str) -> dict[str, Any]:
     }
 
 @mcp.tool()
-def changelog_generator(log_text: str, version: str = "Unreleased") -> dict[str, Any]:
+def changelog_generator(log_text: str, version: str = "Unreleased", api_key: str = "") -> dict[str, Any]:
     """Generate a changelog from git log. Expects: hash|author|date|message per line."""
+    allowed, msg, tier = check_access(api_key)
+    if not allowed:
+        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+
     if not _rate_check("changelog_generator"):
         return {"error": "Rate limit exceeded (50/day)"}
     categories: dict[str, list[str]] = {"Features": [], "Bug Fixes": [], "Documentation": [], "Refactoring": [], "Tests": [], "Other": []}
