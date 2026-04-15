@@ -1,5 +1,5 @@
 name: git-helper-ai-mcp
-description: MCP server for Git analysis tools.
+description: MEOK AI Labs MCP Server
 version: 1.0.0
 tools:
 - name: parse_diff

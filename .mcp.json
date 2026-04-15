@@ -1,6 +1,6 @@
 {
   "name": "git-helper-ai-mcp",
-  "description": "MCP server for Git analysis tools.",
+  "description": "> **By [MEOK AI Labs](https://meok.ai)** \u2014 Sovereign AI tools for everyone.",
   "version": "1.0.0",
   "tools": [
     {
