@@ -10,6 +10,18 @@ from datetime import datetime
 from typing import Any
 from mcp.server.fastmcp import FastMCP
 
+import json
+from collections import defaultdict
+
+FREE_DAILY_LIMIT = 15
+_usage = defaultdict(list)
+def _rl(c="anon"):
+    now = datetime.now(timezone.utc)
+    _usage[c] = [t for t in _usage[c] if (now-t).total_seconds() < 86400]
+    if len(_usage[c]) >= FREE_DAILY_LIMIT: return json.dumps({"error": f"Limit {FREE_DAILY_LIMIT}/day"})
+    _usage[c].append(now); return None
+
+
 mcp = FastMCP("git-helper-ai", instructions="MEOK AI Labs MCP Server")
 _calls: dict[str, list[float]] = {}
 DAILY_LIMIT = 50
@@ -29,6 +41,7 @@ def parse_diff(diff_text: str, api_key: str = "") -> dict[str, Any]:
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+    if err := _rl(): return err
 
     if not _rate_check("parse_diff"):
         return {"error": "Rate limit exceeded (50/day)"}
@@ -74,6 +87,7 @@ def generate_commit_message(diff_text: str, style: str = "conventional", api_key
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+    if err := _rl(): return err
 
     if not _rate_check("generate_commit_message"):
         return {"error": "Rate limit exceeded (50/day)"}
@@ -120,6 +134,7 @@ def analyze_branch(log_text: str, api_key: str = "") -> dict[str, Any]:
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+    if err := _rl(): return err
 
     if not _rate_check("analyze_branch"):
         return {"error": "Rate limit exceeded (50/day)"}
@@ -161,6 +176,7 @@ def changelog_generator(log_text: str, version: str = "Unreleased", api_key: str
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+    if err := _rl(): return err
 
     if not _rate_check("changelog_generator"):
         return {"error": "Rate limit exceeded (50/day)"}
