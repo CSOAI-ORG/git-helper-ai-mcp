@@ -1,6 +1,6 @@
 {
   "name": "git-helper-ai-mcp",
-  "description": "> **By [MEOK AI Labs](https://meok.ai)** \u2014 MEOK AI Labs MCP Server",
+  "description": "MCP server for git helper ai. Features parse diff, generate commit message, analyze branch. From MEOK AI Labs.",
   "version": "1.0.0",
   "tools": [
     {

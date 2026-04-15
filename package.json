@@ -1,7 +1,7 @@
 {
   "name": "git-helper-ai-mcp",
   "version": "1.0.0",
-  "description": "MEOK AI Labs — git helper MCP Server",
+  "description": "MCP server for git helper ai. Features parse diff, generate commit message, analyze branch. From MEOK AI Labs.",
   "main": "server.py",
   "mcp": {
     "name": "git helper",
@@ -9,10 +9,22 @@
     "homepage": "https://meok.ai",
     "repository": "https://github.com/CSOAI-ORG/git-helper-ai-mcp",
     "runtime": "python",
-    "tags": ["mcp", "mcp-server", "meok-ai-labs", "ai-tools"]
+    "tags": [
+      "mcp",
+      "mcp-server",
+      "meok-ai-labs",
+      "ai-tools"
+    ]
   },
-  "keywords": ["mcp", "mcp-server", "meok-ai-labs"],
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "meok-ai-labs"
+  ],
   "author": "MEOK AI Labs <nicholas@meok.ai>",
   "license": "MIT",
-  "repository": {"type": "git", "url": "https://github.com/CSOAI-ORG/git-helper-ai-mcp"}
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CSOAI-ORG/git-helper-ai-mcp"
+  }
 }
