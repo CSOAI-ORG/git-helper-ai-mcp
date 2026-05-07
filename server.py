@@ -37,7 +37,23 @@ def _rate_check(tool: str) -> bool:
 
 @mcp.tool()
 def parse_diff(diff_text: str, api_key: str = "") -> dict[str, Any]:
-    """Parse a unified diff and extract structured change information."""
+    """Parse a unified diff and extract structured change information.
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -83,7 +99,22 @@ def parse_diff(diff_text: str, api_key: str = "") -> dict[str, Any]:
 
 @mcp.tool()
 def generate_commit_message(diff_text: str, style: str = "conventional", api_key: str = "") -> dict[str, Any]:
-    """Generate a commit message from a diff. Styles: conventional, simple, detailed."""
+    """Generate a commit message from a diff. Styles: conventional, simple, detailed.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -130,7 +161,23 @@ def generate_commit_message(diff_text: str, style: str = "conventional", api_key
 
 @mcp.tool()
 def analyze_branch(log_text: str, api_key: str = "") -> dict[str, Any]:
-    """Analyze git log output. Expects format: hash|author|date|message (one per line)."""
+    """Analyze git log output. Expects format: hash|author|date|message (one per line).
+
+    Behavior:
+        This tool is read-only and stateless — it produces analysis output
+        without modifying any external systems, databases, or files.
+        Safe to call repeatedly with identical inputs (idempotent).
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
@@ -172,7 +219,22 @@ def analyze_branch(log_text: str, api_key: str = "") -> dict[str, Any]:
 
 @mcp.tool()
 def changelog_generator(log_text: str, version: str = "Unreleased", api_key: str = "") -> dict[str, Any]:
-    """Generate a changelog from git log. Expects: hash|author|date|message per line."""
+    """Generate a changelog from git log. Expects: hash|author|date|message per line.
+
+    Behavior:
+        This tool generates structured output without modifying external systems.
+        Output is deterministic for identical inputs. No side effects.
+        Free tier: 10/day rate limit. Pro tier: unlimited.
+        No authentication required for basic usage.
+
+    When to use:
+        Use this tool when you need structured analysis or classification
+        of inputs against established frameworks or standards.
+
+    When NOT to use:
+        Not suitable for real-time production decision-making without
+        human review of results.
+    """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
         return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
