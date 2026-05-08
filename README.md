@@ -1,45 +1,58 @@
-[![git-helper-ai-mcp MCP server](https://glama.ai/mcp/servers/CSOAI-ORG/git-helper-ai-mcp/badges/score.svg)](https://glama.ai/mcp/servers/CSOAI-ORG/git-helper-ai-mcp)
-[![MCP Registry](https://img.shields.io/badge/MCP_Registry-Published-green)](https://registry.modelcontextprotocol.io)
-[![PyPI](https://img.shields.io/pypi/v/git-helper-ai-mcp)](https://pypi.org/project/git-helper-ai-mcp/)
-
-[![git-helper-ai-mcp MCP server](https://glama.ai/mcp/servers/CSOAI-ORG/git-helper-ai-mcp/badges/card.svg)](https://glama.ai/mcp/servers/CSOAI-ORG/git-helper-ai-mcp)
-
 <div align="center">
 
-[![GitHub stars](https://img.shields.io/github/stars/CSOAI-ORG/git-helper-ai-mcp)](https://github.com/CSOAI-ORG/git-helper-ai-mcp/stargazers)
-
-# ugitU helperU aiU mcp
+# Git Helper Ai MCP
 
 **Git Helper AI MCP Server — Git analysis tools.**
 
-[![npm version](https://img.shields.io/npm/v/@meok-ai/git-helper-ai-mcp)](https://www.npmjs.com/package/@meok-ai/git-helper-ai-mcp)
+[![PyPI](https://img.shields.io/pypi/v/meok-git-helper-ai-mcp)](https://pypi.org/project/meok-git-helper-ai-mcp/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![MEOK AI Labs](https://img.shields.io/badge/MEOK_AI_Labs-255+_servers-purple)](https://meok.ai)
-
-[Installation](#installation) · [Docs](https://csoai.org) · [Report Bug](https://github.com/CSOAI-ORG/git-helper-ai-mcp/issues)
+[![MEOK AI Labs](https://img.shields.io/badge/MEOK_AI_Labs-MCP_Server-purple)](https://meok.ai)
 
 </div>
 
----
+## Overview
+
+Git Helper AI MCP Server — Git analysis tools.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `parse_diff` | Parse a unified diff and extract structured change information. |
+| `generate_commit_message` | Generate a commit message from a diff. Styles: conventional, simple, detailed. |
+| `analyze_branch` | Analyze git log output. Expects format: hash|author|date|message (one per line). |
+| `changelog_generator` | Generate a changelog from git log. Expects: hash|author|date|message per line. |
 
 ## Installation
 
 ```bash
-pip install git-helper-ai-mcp
-# or
-npm install -g @meok-ai/git-helper-ai-mcp
+pip install meok-git-helper-ai-mcp
 ```
 
-## Quick Start
+## Usage with Claude Desktop
 
-See the project repository for full documentation and examples.
+Add to your Claude Desktop MCP config (`claude_desktop_config.json`):
 
-## Enterprise Support
+```json
+{
+  "mcpServers": {
+    "git-helper-ai": {
+      "command": "python",
+      "args": ["-m", "meok_git_helper_ai_mcp.server"]
+    }
+  }
+}
+```
 
-- 📧 nicholas@csoai.org
-- 🌐 [CSOAI.org](https://csoai.org)
+## Usage with FastMCP
+
+```python
+from mcp.server.fastmcp import FastMCP
+
+# This server exposes 4 tool(s) via MCP
+# See server.py for full implementation
+```
 
 ## License
 
-MIT © [CSOAI](https://csoai.org)
-<!-- mcp-name: io.github.CSOAI-ORG/git-helper-ai-mcp -->
+MIT © [MEOK AI Labs](https://meok.ai)
