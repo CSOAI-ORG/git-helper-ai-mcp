@@ -1,7 +1,6 @@
 """Git Helper AI MCP Server — Git analysis tools."""
 
 import sys, os
-sys.path.insert(0, os.path.expanduser('~/clawd/meok-labs-engine/shared'))
 from auth_middleware import check_access
 
 import re
@@ -12,6 +11,15 @@ from mcp.server.fastmcp import FastMCP
 
 import json
 from collections import defaultdict
+
+STRIPE_199 = "https://buy.stripe.com/00wfZjcgAeUW4c5cyQ8k90K"
+
+def _add_upgrade_tail(response, tier="free"):
+    """Append upgrade nudge to free-tier success responses."""
+    if isinstance(response, dict) and tier == "free":
+        response["_upgrade_note"] = "Pro tier: unlimited calls + priority support. Upgrade: " + STRIPE_199
+    return response
+
 
 FREE_DAILY_LIMIT = 15
 _usage = defaultdict(list)
@@ -75,7 +83,7 @@ def parse_diff(diff_text: str, api_key: str = "") -> dict[str, Any]:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
     if err := _rl(): return err
 
     if not _rate_check("parse_diff"):
@@ -156,7 +164,7 @@ def generate_commit_message(diff_text: str, style: str = "conventional", api_key
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
     if err := _rl(): return err
 
     if not _rate_check("generate_commit_message"):
@@ -238,7 +246,7 @@ def analyze_branch(log_text: str, api_key: str = "") -> dict[str, Any]:
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
     if err := _rl(): return err
 
     if not _rate_check("analyze_branch"):
@@ -315,7 +323,7 @@ def changelog_generator(log_text: str, version: str = "Unreleased", api_key: str
     """
     allowed, msg, tier = check_access(api_key)
     if not allowed:
-        return {"error": msg, "upgrade_url": "https://meok.ai/pricing"}
+        return {"error": msg, "upgrade_url": STRIPE_199}
     if err := _rl(): return err
 
     if not _rate_check("changelog_generator"):
@@ -343,5 +351,8 @@ def changelog_generator(log_text: str, version: str = "Unreleased", api_key: str
     total = sum(len(v) for v in categories.values())
     return {"changelog": changelog, "version": version, "total_entries": total, "categories": {k: len(v) for k, v in categories.items() if v}}
 
-if __name__ == "__main__":
+def main():
     mcp.run()
+
+if __name__ == '__main__':
+    main()
