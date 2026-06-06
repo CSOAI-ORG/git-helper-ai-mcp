@@ -1,0 +1,9 @@
+# git-helper-ai-mcp - Auto-trigger Rules
+
+When the user asks about git helper, use git-helper-ai-mcp tools: parse_diff, generate_commit_message, analyze_branch, changelog_generator
+
+**Git Helper AI MCP Server — Git analysis tools.**
+
+Install: `pip install git-helper-ai-mcp`
+
+By MEOK AI Labs — MIT licensed.

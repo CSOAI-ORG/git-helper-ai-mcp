@@ -1,4 +1,5 @@
-"""Git Helper AI MCP Server — Git analysis tools."""
+"""
+Git Helper AI MCP Server — Git analysis tools."""
 
 import sys, os
 from auth_middleware import check_access

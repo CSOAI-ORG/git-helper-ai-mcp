@@ -1,0 +1,25 @@
+{
+  "name": "git-helper-ai-mcp",
+  "title": "Git Helper Ai Mcp",
+  "description": "MCP server for git helper ai. Features parse diff, generate commit message, analyze branch. From MEOK AI Labs.",
+  "version": "1.0.7",
+  "homepage": "https://meok.ai",
+  "license": "MIT",
+  "transport": {
+    "type": "stdio"
+  },
+  "tools": [
+    {
+      "name": "parse_diff"
+    },
+    {
+      "name": "generate_commit_message"
+    },
+    {
+      "name": "analyze_branch"
+    },
+    {
+      "name": "changelog_generator"
+    }
+  ]
+}
