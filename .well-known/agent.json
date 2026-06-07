@@ -1,0 +1,59 @@
+{
+  "name": "git-helper-ai-mcp",
+  "description": "Git Helper Ai MCP Server by MEOK AI Labs",
+  "url": "https://proofof.ai/scorecard/git-helper-ai-mcp.html",
+  "version": "1.0.7",
+  "protocolVersion": "0.2.0",
+  "provider": {
+    "organization": "MEOK AI Labs",
+    "url": "https://meok.ai"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text"
+  ],
+  "defaultOutputModes": [
+    "text"
+  ],
+  "skills": [
+    {
+      "id": "parse_diff",
+      "name": "Parse Diff",
+      "description": "parse_diff via git-helper-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "generate_commit_message",
+      "name": "Generate Commit Message",
+      "description": "generate_commit_message via git-helper-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "analyze_branch",
+      "name": "Analyze Branch",
+      "description": "analyze_branch via git-helper-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    },
+    {
+      "id": "changelog_generator",
+      "name": "Changelog Generator",
+      "description": "changelog_generator via git-helper-ai-mcp",
+      "tags": [
+        "mcp",
+        "compliance"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "acpVersion": "0.1",
+  "agent": {
+    "name": "git-helper-ai-mcp",
+    "description": "Git Helper Ai MCP Server by MEOK AI Labs",
+    "version": "1.0.7",
+    "provider": "MEOK AI Labs",
+    "interfaces": [
+      {
+        "type": "mcp",
+        "transport": "stdio",
+        "package": "git-helper-ai-mcp"
+      }
+    ],
+    "capabilities": [
+      "parse_diff",
+      "generate_commit_message",
+      "analyze_branch",
+      "changelog_generator"
+    ]
+  }
+}
